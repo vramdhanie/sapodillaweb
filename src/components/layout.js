@@ -10,6 +10,8 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
+import Footer from "./footer"
+
 import "./layout.css"
 
 import styled from "styled-components"
@@ -26,17 +28,11 @@ const Layout = ({ children, className }) => {
   `)
 
   return (
-    <>
+    <div className={className}>
       <Header siteTitle={data.site.siteMetadata.title} />
-      <div className={className}>
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
-    </>
+      <main>{children}</main>
+      <Footer />
+    </div>
   )
 }
 
@@ -44,4 +40,11 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default styled(Layout)``
+export default styled(Layout)`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  main {
+    flex: 1;
+  }
+`
